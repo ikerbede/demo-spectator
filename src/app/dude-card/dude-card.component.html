@@ -1,0 +1,27 @@
+<article class="dude-card">
+  <header class="dude-card-header">
+    <div class="dude-card-header-avatar">
+      <img [src]="dude.avatar" [alt]="dude.name" />
+    </div>
+    <h4 class="dude-card-header-title">{{ dude.name }}</h4>
+  </header>
+
+  <hr class="dude-card-divider" />
+
+  <section class="dude-card-content">
+    <p class="dude-card-content-role">{{ dude.role }}</p>
+    <p class="dude-card-content-team">{{ dude.team }}</p>
+    <p class="dude-card-content-birthYear">{{ dude.birthYear }}</p>
+  </section>
+
+  <footer class="dude-card-footer">
+    <button
+      class="dude-card-footer-favoritebtn"
+      type="button"
+      (click)="changeFavorite()"
+    >
+      <span *ngIf="isFavorite">★</span>
+      <span *ngIf="!isFavorite">☆</span>
+    </button>
+  </footer>
+</article>
