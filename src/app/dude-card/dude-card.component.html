@@ -15,13 +15,10 @@
   </section>
 
   <footer class="dude-card-footer">
-    <button
-      class="dude-card-footer-favoritebtn"
-      type="button"
-      (click)="changeFavorite()"
-    >
-      <span *ngIf="isFavorite">★</span>
-      <span *ngIf="!isFavorite">☆</span>
-    </button>
+    <iker-button-favorite
+      [isFavorite]="isFavorite"
+      [disabled]="false"
+      (changeFavorite)="changeFavorite()"
+    ></iker-button-favorite>
   </footer>
 </article>

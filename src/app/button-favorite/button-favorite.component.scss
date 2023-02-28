@@ -1,0 +1,24 @@
+$componentId: 'button-favorite';
+
+.#{$componentId} {
+  width: 160px;
+  padding: 4px 20px;
+
+  background-color: white;
+  color: #049cd8;
+
+  border: 1px solid #049cd8;
+  border-radius: 16px;
+
+  cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &--active {
+    background-color: #049cd8;
+    color: white;
+    border-color: white;
+  }
+}

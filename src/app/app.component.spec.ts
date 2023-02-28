@@ -1,32 +1,45 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { MockComponent } from 'ng-mocks';
 import { AppComponent } from './app.component';
-import { NxWelcomeComponent } from './nx-welcome.component';
+import { DudeCardComponent } from './dude-card/dude-card.component';
+import { DudesService } from './shared/dudes.service';
+import { DUDES } from './shared/dudes.constant';
 
 describe('AppComponent', () => {
+  let fixture: ComponentFixture<AppComponent>;
+  let component: AppComponent;
+  let service: DudesService;
+
+  const dudesServiceMock: Partial<DudesService> = {
+    getDudes: jest.fn().mockReturnValue(DUDES),
+  };
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent, NxWelcomeComponent],
+      imports: [AppComponent, MockComponent(DudeCardComponent)],
+      providers: [{ provide: DudesService, useValue: dudesServiceMock }],
     }).compileComponents();
+
+    service = TestBed.inject(DudesService);
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
   });
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'demo-spectator'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('demo-spectator');
+  it(`should get the dudes from te service`, () => {
+    fixture.detectChanges();
+    expect(service.getDudes).toHaveBeenCalledTimes(1);
+    expect(component.dudes).toEqual(DUDES);
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
+  it('should render the dudes', () => {
     fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain(
-      'Welcome demo-spectator'
-    );
+    const dudes: NodeList =
+      fixture.nativeElement.querySelectorAll('iker-dude-card');
+    expect(dudes.length).toEqual(DUDES.length);
   });
 });

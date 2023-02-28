@@ -1,0 +1,9 @@
+<button
+  type="button"
+  class="button-favorite"
+  [class.button-favorite--active]="isFavorite"
+  [disabled]="disabled"
+  (click)="onClick()"
+>
+  FAVORITE {{ isFavorite ? '★' : '☆' }}
+</button>

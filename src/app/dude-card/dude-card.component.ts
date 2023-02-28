@@ -1,20 +1,15 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnInit,
-} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ButtonFavoriteComponent } from '../button-favorite/button-favorite.component';
 import { Dude } from '../shared/dude.model';
 import { DudesService } from '../shared/dudes.service';
 
 @Component({
   selector: 'iker-dude-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ButtonFavoriteComponent],
   templateUrl: './dude-card.component.html',
   styleUrls: ['./dude-card.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DudeCardComponent implements OnInit {
   @Input() dude!: Dude;
